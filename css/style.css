@@ -1,7 +1,556 @@
-.numbers {
+/* ========== DESIGN MODERNE ALLECO SOLUTIONS ========== */
+
+/* ===== ROOT VARIABLES ===== */
+:root {
+    --primary-color: #0e4f0a;
+    --primary-light: #1a6b15;
+    --primary-dark: #092d07;
+    --accent-color: #10b981;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --bg-light: #f9fafb;
+    --bg-white: #ffffff;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== SMOOTH SCROLLING ===== */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+
+/* ===== NAVBAR MODERNE ===== */
+.navbar {
+    background: var(--bg-white);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    padding: 0.75rem 0;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    color: var(--primary-color) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+    color: var(--accent-color) !important;
+}
+
+.nav-link {
+    color: var(--text-dark) !important;
+    font-weight: 500;
+    position: relative;
+    transition: var(--transition);
+    margin: 0 0.5rem;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    background: radial-gradient(900px circle at 10% 10%, rgba(16, 185, 129, 0.35), transparent 55%),
+                radial-gradient(700px circle at 90% 25%, rgba(26, 107, 21, 0.35), transparent 60%),
+                linear-gradient(135deg, var(--primary-dark) 0%, #0ea65a 40%, var(--accent-color) 100%);
+    min-height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animation gradient “vivante” */
+.hero-section::after {
+    content: "";
+    position: absolute;
+    inset: -30%;
+    background: conic-gradient(from 180deg,
+        rgba(16, 185, 129, 0.0) 0deg,
+        rgba(16, 185, 129, 0.35) 60deg,
+        rgba(26, 107, 21, 0.35) 120deg,
+        rgba(16, 185, 129, 0.0) 200deg);
+    filter: blur(24px);
+    opacity: 0.9;
+    animation: heroSpin 9s linear infinite;
+    pointer-events: none;
+}
+
+/* Halo + mesh discret */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.18), rgba(255,255,255,0) 62%);
+    border-radius: 50%;
+    transform: translate(150px, -150px);
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Assurer que le texte reste au-dessus */
+.hero-section .container,
+.hero-section .row {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes heroSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+@keyframes float {
+    0%, 100% { transform: translate(150px, -150px); }
+    50% { transform: translate(180px, -120px); }
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    animation: slideInUp 0.8s ease-out;
+}
+
+.hero-section h6 {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 300;
+    animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== CUSTOM BLOCKS / CARDS ===== */
+.custom-block {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid #e5e7eb;
+}
+
+.custom-block:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--accent-color);
+}
+
+.custom-block h5 {
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.custom-block:hover h5 {
+    color: var(--accent-color);
+}
+
+.custom-block-image {
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.custom-block:hover .custom-block-image {
+    transform: scale(1.05);
+}
+
+/* ===== FEATURED SECTION ===== */
+.featured-section {
+    background: var(--bg-light);
+    padding: 80px 0;
+    position: relative;
+}
+
+.featured-section .numbers {
     font-size: 19px;
     font-weight: 100;
     height: 60px;
     width: 230px;
-    color: #0e4f0a;
+    color: var(--primary-color);
+}
+
+/* ===== BUTTONS ===== */
+.custom-btn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white !important;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-weight: 600;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.custom-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+}
+
+.custom-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.custom-btn:hover::before {
+    left: 100%;
+}
+
+.custom-border-btn {
+    background: transparent !important;
+    color: white !important;
+    border: 2px solid white;
+    box-shadow: none;
+}
+
+.custom-border-btn:hover {
+    background: white !important;
+    color: var(--primary-color) !important;
+}
+
+/* ===== TIMELINE SECTION ===== */
+.timeline-section {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    position: relative;
+    padding: 100px 0;
+}
+
+.timeline-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.vertical-scrollable-timeline li {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.vertical-scrollable-timeline li:nth-child(1) { animation-delay: 0.2s; }
+.vertical-scrollable-timeline li:nth-child(2) { animation-delay: 0.4s; }
+.vertical-scrollable-timeline li:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vertical-scrollable-timeline li h4 {
+    color: white;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.icon-holder {
+    width: 50px;
+    height: 50px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-lg);
+}
+
+.vertical-scrollable-timeline li:hover .icon-holder {
+    background: white;
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* ===== FAQ SECTION ===== */
+.faq-section {
+    background: var(--bg-light);
+    padding: 80px 0;
+}
+
+.faq-section h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.accordion-button {
+    background: white;
+    color: var(--text-dark);
+    font-weight: 600;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.accordion-button:hover {
+    background: var(--bg-light);
+    color: var(--primary-color);
+}
+
+.accordion-body {
+    background: white;
+    color: var(--text-light);
+    border-radius: 0 0 8px 8px;
+    line-height: 1.8;
+}
+
+/* ===== CONTACT SECTION ===== */
+.contact-section {
+    background: var(--bg-white);
+    padding: 80px 0;
+}
+
+.contact-section h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.google-map {
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+}
+
+.google-map:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-5px);
+}
+
+.contact-section h4 {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.contact-section p {
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+/* ===== FORM STYLING ===== */
+.custom-form .form-control,
+.custom-form .form-floating > label {
+    border-color: #e5e7eb;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.custom-form .form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.25);
+    background: white;
+}
+
+.custom-form .form-control::placeholder {
+    color: var(--text-light);
+}
+
+.custom-form button[type="submit"] {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-weight: 600;
+    width: 100%;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+}
+
+.custom-form button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--text-dark);
+    color: white;
+    padding: 60px 0 30px;
+}
+
+.site-footer-title {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+}
+
+.site-footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.site-footer-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.copyright-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+}
+
+.copyright-text a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.copyright-text a:hover {
+    text-decoration: underline;
+}
+
+/* ===== SCROLL TO TOP BUTTON ===== */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+    z-index: 999;
+    font-size: 1.5rem;
+}
+
+
+/* ===== FOOTER MOBILE FIX ===== */
+@media (max-width: 576px) {
+    /* Evite le footer trop “tassé” et recentre le copyright sur mobile */
+    .site-footer .copyright-text {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.25rem !important;
+    }
+}
+
+
+.scroll-to-top.show {
+    display: flex;
+
+    animation: slideInUp 0.3s ease-out;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* ===== RIPPLE EFFECT ===== */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .faq-section h2,
+    .contact-section h2,
+    .timeline-section h2 {
+        font-size: 1.75rem;
+    }
+    
+    .hero-section::before {
+        width: 300px;
+        height: 300px;
+        transform: translate(100px, -100px);
+    }
 }

@@ -578,6 +578,13 @@ strong {
   height: 100%;
   min-height: 350px;
   padding: 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .custom-block-overlay {
+    min-height: 520px;
+  }
 }
 
 .custom-block-overlay > a {
@@ -597,27 +604,45 @@ strong {
   top: 0;
   right: 0;
   left: 0;
-  padding: 30px;
+  padding: 30px 30px 150px 30px;
   /* Make overlay text responsive */
   flex-wrap: wrap;
   overflow-wrap: break-word;
   word-break: break-word;
   width: 100%;
   min-width: 0;
-  /* Remove any fixed height if present */
 }
 
 .custom-block-overlay-text p {
-  font-size: 1rem; /* Responsive base size */
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
   word-break: break-word;
 }
 
 @media (max-width: 768px) {
+  .custom-block-overlay-text {
+    padding: 25px 20px 130px 20px;
+  }
+  
   .custom-block-overlay-text h5,
   .custom-block-overlay-text p {
     font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .custom-block-overlay-text {
+    padding: 20px 18px 110px 18px;
+  }
+  
+  .custom-block-overlay-text h5 {
+    font-size: 1.1rem;
+  }
+  
+  .custom-block-overlay-text p {
+    font-size: 0.9rem;
   }
 }
 
@@ -626,13 +651,47 @@ strong {
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 2;
-  padding: 20px 35px;
+  z-index: 3;
+  padding: 15px 30px 20px 30px;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 80px;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .social-share {
+    padding: 12px 20px 15px 20px;
+    min-height: 70px;
+  }
+}
+
+@media (max-width: 576px) {
+  .social-share {
+    padding: 10px 15px 12px 15px;
+    min-height: 65px;
+  }
+}
+
+.social-share p {
+  margin: 0;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.social-share .social-icon {
+  display: flex;
+  gap: 8px;
+  margin: 0;
 }
 
 .social-share .bi-bookmark {
   color: var(--white-color);
   font-size: var(--h5-font-size);
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .social-share .bi-bookmark:hover {
